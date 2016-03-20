@@ -1,5 +1,7 @@
 /**
  * Classe de modelo.
+ * Deve estar preparado para leitura no Simplex. Para criar um modelo,
+ * favor usar o metodo {@link #prepararModelo() prepararModelo()}.
  */
 public class Modelo{
 	private int minmax; // 1 = Min, -1 = Max
@@ -7,7 +9,7 @@ public class Modelo{
 	private double[][] restricoes;
 	private int numVar;
 
-	public Modelo(int minmax, double[] z, double[][] rest, int n){
+	private Modelo(int minmax, double[] z, double[][] rest, int n){
 		this.minmax = minmax;
 		this.z = z;
 		this.restricoes = rest;
