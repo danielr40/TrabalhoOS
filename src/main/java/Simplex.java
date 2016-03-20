@@ -24,7 +24,8 @@ public class Simplex{
 	this.numVar = n;
         this.matriz = new double [restricoes.length+1][restricoes[0].length];
         this.matrizAux = new double [restricoes.length+1][restricoes[0].length];
-        matriz[0] = z;
+        matriz[0][0] = 0;
+        System.arraycopy(z, 0, matriz[0], 1, z.length);
         System.arraycopy(restricoes, 0, matriz, 1, restricoes.length);
         vnb = new int [numVar];
         vb = new int [restricoes.length];
