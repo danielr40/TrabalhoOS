@@ -4,12 +4,12 @@
  * favor usar o metodo {@link #prepararModelo() prepararModelo()}.
  */
 public class Modelo{
-	private int minmax; // 1 = Min, -1 = Max
+	private int minmax; // -1 = Min, 1 = Max
 	private double[] z;
 	private double[][] restricoes;
 	private int numVar;
 
-	private Modelo(int minmax, double[] z, double[][] rest, int n){
+	public Modelo(int minmax, double[] z, double[][] rest, int n){
 		this.minmax = minmax;
 		this.z = z;
 		this.restricoes = rest;
@@ -72,7 +72,7 @@ public class Modelo{
 	 * de variaveis + 1 (O resultado da inequação). Ou seja, uma equação
 	 * <tt>2x + 3y >= 16</tt> se transofrma em <tt>[2, 3, 16]</tt>.
 	 *
-	 * @param restricoes
+	 * @param restricoes matriz das restrições
 	 */
 	public void setRestricoes(double[][] restricoes){
 		this.restricoes = restricoes;
