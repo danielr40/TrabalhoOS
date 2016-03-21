@@ -28,14 +28,21 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jTextField1 = new javax.swing.JTextField();
+        javax.swing.JTextField numVarTxtField = new javax.swing.JTextField();
         MinBtn = new javax.swing.JRadioButton();
         MaxBtn = new javax.swing.JRadioButton();
         labelProblema = new javax.swing.JLabel();
+        StartBtn = new javax.swing.JButton();
+        labelVariaveis = new javax.swing.JLabel();
+        labelRestricoes = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setText("jTextField1");
+        numVarTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numVarTxtFieldActionPerformed(evt);
+            }
+        });
 
         MinBtn.setText("Minimização");
         MinBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -48,21 +55,37 @@ public class Principal extends javax.swing.JFrame {
 
         labelProblema.setText("Problema de:");
 
+        StartBtn.setText("Otimizar!");
+
+        labelVariaveis.setText("Número de Variáveis: ");
+
+        labelRestricoes.setText("Restrições:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(StartBtn)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(labelProblema)
-                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelRestricoes)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(MinBtn)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(labelVariaveis)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(numVarTxtField))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(labelProblema)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(MinBtn)))
                         .addGap(18, 18, 18)
                         .addComponent(MaxBtn)))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,9 +95,15 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(MinBtn)
                     .addComponent(MaxBtn)
                     .addComponent(labelProblema))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(numVarTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelVariaveis))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelRestricoes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addComponent(StartBtn)
+                .addContainerGap())
         );
 
         pack();
@@ -83,6 +112,10 @@ public class Principal extends javax.swing.JFrame {
     private void MinBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MinBtnActionPerformed
+
+    private void numVarTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numVarTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numVarTxtFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,8 +155,10 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton MaxBtn;
     private javax.swing.JRadioButton MinBtn;
+    private javax.swing.JButton StartBtn;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelProblema;
+    private javax.swing.JLabel labelRestricoes;
+    private javax.swing.JLabel labelVariaveis;
     // End of variables declaration//GEN-END:variables
 }
