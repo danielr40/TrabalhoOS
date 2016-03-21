@@ -303,8 +303,9 @@ public class Simplex{
 
 		// Nas (SCI) vazias, multiplica-se a (SCS) marcada em sua respectiva
 		// coluna com a (SCI) marcada de sua respectiva linha
-		for(int i = 0; i < matrizSup.length && i != linha; i++){
-			for(int j = 0; j < matrizSup[linha].length && j != coluna; j++){
+		for(int i = 0; i < matrizSup.length; i++){
+			for(int j = 0; j < matrizSup[linha].length; j++){
+                            if(j != coluna&&i != linha)	
 				matrizInf[i][j] = matrizInf[i][coluna] * matrizSup[linha][j];
 			}
 		}
@@ -321,7 +322,7 @@ public class Simplex{
 		for(int i = 0; i < matrizSup.length; i++){
 			for(int j = 0; j < matrizSup[linha].length; j++){
 				if(i != linha && j != coluna){
-					novaMatriz[i][j] = matrizInf[i][j] + matrizSup[i][j];
+                                   	novaMatriz[i][j] = matrizInf[i][j] + matrizSup[i][j];
 				}else {
 					novaMatriz[i][j] = matrizInf[i][j];
 				}

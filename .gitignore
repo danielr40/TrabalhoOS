@@ -49,3 +49,4 @@ fabric.properties
 
 ### Intellij Patch ###
 *.iml
+/target/
