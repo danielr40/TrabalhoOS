@@ -58,11 +58,21 @@ public class Simplex{
 	 * @return enum equivalente ao resultado do processamento.
 	 */
 	public ResultadoSimplex processar(){
+            
+                printMatriz(matrizSup);
+                System.out.println("");
+                
 		while(!fimPriemriaEtapa){
 			primeiraEtapa();
+                        
+                        printMatriz(matrizSup);
+                        System.out.println("");
 		}
 		while(!fimSegundaEtapa){
 			segundaEtapa();
+                        
+                        printMatriz(matrizSup);
+                        System.out.println("");
 		}
         // TODO: Retornar valor de z e das variáveis não basicas.
 		return this.resultado;
@@ -185,9 +195,6 @@ public class Simplex{
 	private void segundaEtapa(){
 
 		int linha = -1, coluna = -1;
-                
-                printMatriz(matrizSup);
-                System.out.println("");
 
 		// Procura elemento positivo na linha da função objetiva.
 		for(int i = 1; i < matrizSup[0].length; i++){
