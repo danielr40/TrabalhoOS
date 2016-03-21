@@ -185,6 +185,9 @@ public class Simplex{
 	private void segundaEtapa(){
 
 		int linha = -1, coluna = -1;
+                
+                printMatriz(matrizSup);
+                System.out.println("");
 
 		// Procura elemento positivo na linha da função objetiva.
 		for(int i = 1; i < matrizSup[0].length; i++){
@@ -319,4 +322,19 @@ public class Simplex{
 		}
 		matrizSup = novaMatriz;
 	}
+        
+        /**
+         * M�todo que imprime uma matriz
+         * @param Matriz a ser impressa
+         */
+        public void printMatriz(double[][]m)
+        {
+            for(int i=0;i<m.length;i++){
+                System.out.print("| ");
+                for(int j=0;j<m[i].length;j++){
+                    System.out.print(m[i][j]+" ");
+                }
+                System.out.print(" |\n");
+            }            
+        }
 }
