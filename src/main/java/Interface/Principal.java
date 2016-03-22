@@ -170,14 +170,17 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        String[]tabNomes = new String[this.getNumVar()];
+        String[]tabNomes = new String[this.getNumVar()+2];
 
-        for(String str : tabNomes) {
-            str = "titulo";
+        for(int i=0;i<this.getNumVar();i++) {
+            tabNomes[i]="X"+(i+1);
         }
+        
+        tabNomes[tabNomes.length-2]="Operador";
+        tabNomes[tabNomes.length-1]="Valor";
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object[this.getNumRestricoes()][this.getNumVar()],
+            new Object[this.getNumRestricoes()][this.getNumVar()+2],
             tabNomes
         ));
     }//GEN-LAST:event_jButton1ActionPerformed
