@@ -5,6 +5,8 @@
  */
 package Interface;
 
+import java.util.Arrays;
+
 /**
  *
  * @author júlia
@@ -31,6 +33,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jTextField1 = new javax.swing.JTextField();
         MinBtn = new javax.swing.JRadioButton();
         StartBtn = new javax.swing.JButton();
         MaxBtn = new javax.swing.JRadioButton();
@@ -54,6 +57,8 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,12 +124,9 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
@@ -157,12 +159,13 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(labelRestricoes)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,31 +209,50 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_MinBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
+        int nV = this.getNumVar()>0 ? this.getNumVar() : 0;
+        int nR = this.getNumRestricoes()>0 ? this.getNumRestricoes() : 0;
+        
         // atualizar tabela da funcao objetiva
-        String[]tabNomes = new String[this.getNumVar()];
-
-        for(int i=0;i<this.getNumVar();i++) {
+        String[]tabNomes = new String[nV];
+        Object[][]valores = new Object[1][nV];
+        
+        // preencher nome das colunas da f.o.
+        for(int i=0;i<tabNomes.length;i++) {
             tabNomes[i]="X"+(i+1);
         }
         
+        // autopreencher valores das variaveis da f.o.
+        for(int i=0;i<valores[0].length;i++) {
+            valores[0][i]=0;
+        }
+        
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object[1][this.getNumVar()],
+            valores,
             tabNomes
         ));
         
         // atualizar tabela das restricoes
-        tabNomes = new String[this.getNumVar()+2];
-
-        for(int i=0;i<this.getNumVar();i++) {
+        tabNomes = new String[nV+2];
+        valores = new Object[nR][nV+2];
+        
+        // preencher nome das colunas das restricoes
+        for(int i=0;i<tabNomes.length;i++) {
             tabNomes[i]="X"+(i+1);
+        }
+        
+        // autopreencher valores das variaveis das restricoes
+        for(int i=0;i<valores.length;i++) {
+            for(int j=0;j<valores[i].length;j++) {
+                valores[i][j]=0;
+            }
         }
         
         tabNomes[tabNomes.length-2]="Operador";
         tabNomes[tabNomes.length-1]="Valor";
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object[this.getNumRestricoes()][this.getNumVar()+2],
+            valores,
             tabNomes
         ));
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -286,6 +308,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelNumRestricoes;
     private javax.swing.JLabel labelProblema;
     private javax.swing.JLabel labelRestricoes;
