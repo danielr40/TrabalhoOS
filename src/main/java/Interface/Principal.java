@@ -72,6 +72,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setText("Daniel Reis, Felipe Botrel, Júlia Gobbo e Mateus Silveira");
 
         jButton1.setText("Confirmar Valores");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,12 +111,11 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(labelVariaveis)
                                     .addComponent(labelNumRestricoes))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(numVar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(numRestricoes, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton1))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(numRestricoes, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                                    .addComponent(numVar))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))
                             .addComponent(labelRestricoes)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(203, 203, 203)
@@ -163,6 +167,20 @@ public class Principal extends javax.swing.JFrame {
     private void MinBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MinBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        String[]tabNomes = new String[this.getNumVar()];
+
+        for(String str : tabNomes) {
+            str = "titulo";
+        }
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object[this.getNumRestricoes()][this.getNumVar()],
+            tabNomes
+        ));
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,4 +234,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JSpinner numRestricoes;
     private javax.swing.JSpinner numVar;
     // End of variables declaration//GEN-END:variables
+
+    public int getNumRestricoes() {
+        return (Integer) numRestricoes.getValue();
+    }
+    
+    public int getNumVar() {
+        return (Integer) numVar.getValue();
+    }
 }
