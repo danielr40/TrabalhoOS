@@ -1,3 +1,7 @@
+
+import Simplex.Simplex;
+import Simplex.Modelo;
+
 /**
  * Created by Felipe on 2016-03-20.
  */

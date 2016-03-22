@@ -1,3 +1,5 @@
+package Simplex;
+
 /**
  * Executa o metodo simplex.
  */
@@ -59,19 +61,19 @@ public class Simplex{
 	 */
 	public ResultadoSimplex processar(){
             
-                printMatriz(matrizSup);
+                Ferramentas.printMatriz(matrizSup);
                 System.out.println("");
                 
 		while(!fimPriemriaEtapa){
 			primeiraEtapa();
                         
-                        printMatriz(matrizSup);
+                        Ferramentas.printMatriz(matrizSup);
                         System.out.println("");
 		}
 		while(!fimSegundaEtapa){
 			segundaEtapa();
                         
-                        printMatriz(matrizSup);
+                        Ferramentas.printMatriz(matrizSup);
                         System.out.println("");
 		}
         // TODO: Retornar valor de z e das variáveis não basicas.
@@ -330,19 +332,4 @@ public class Simplex{
 		}
 		matrizSup = novaMatriz;
 	}
-        
-        /**
-         * M�todo que imprime uma matriz
-         * @param Matriz a ser impressa
-         */
-        public void printMatriz(double[][]m)
-        {
-            for(int i=0;i<m.length;i++){
-                System.out.print("| ");
-                for(int j=0;j<m[i].length;j++){
-                    System.out.print(m[i][j]+" ");
-                }
-                System.out.print(" |\n");
-            }            
-        }
 }

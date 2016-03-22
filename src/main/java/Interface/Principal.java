@@ -5,7 +5,11 @@
  */
 package Interface;
 
+import Simplex.Ferramentas;
+import Simplex.Modelo;
+import Simplex.Simplex;
 import java.util.Arrays;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -47,10 +51,10 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaRestr = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabelaZ = new javax.swing.JTable();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -71,8 +75,18 @@ public class Principal extends javax.swing.JFrame {
 
         StartBtn.setFont(new java.awt.Font("Bebas Neue Bold", 0, 18)); // NOI18N
         StartBtn.setText("Otimizar!");
+        StartBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartBtnActionPerformed(evt);
+            }
+        });
 
         MaxBtn.setText("Maximização");
+        MaxBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MaxBtnActionPerformed(evt);
+            }
+        });
 
         labelProblema.setText("Problema de:");
 
@@ -95,7 +109,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaRestr.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -106,11 +120,11 @@ public class Principal extends javax.swing.JFrame {
                 "X1", "X2", "Operador", "Valor"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tabelaRestr);
 
         jLabel3.setText("Função Objetiva: ");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaZ.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null}
             },
@@ -118,7 +132,7 @@ public class Principal extends javax.swing.JFrame {
                 "X1", "X2"
             }
         ));
-        jScrollPane1.setViewportView(jTable2);
+        jScrollPane1.setViewportView(tabelaZ);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,10 +218,6 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MinBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MinBtnActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         int nV = this.getNumVar()>0 ? this.getNumVar() : 0;
@@ -227,7 +237,7 @@ public class Principal extends javax.swing.JFrame {
             valores[0][i]=0;
         }
         
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaZ.setModel(new javax.swing.table.DefaultTableModel(
             valores,
             tabNomes
         ));
@@ -251,11 +261,37 @@ public class Principal extends javax.swing.JFrame {
         tabNomes[tabNomes.length-2]="Operador";
         tabNomes[tabNomes.length-1]="Valor";
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaRestr.setModel(new javax.swing.table.DefaultTableModel(
             valores,
             tabNomes
         ));
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void MinBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinBtnActionPerformed
+        // TODO add your handling code here:
+        MaxBtn.setSelected(false);
+        minmax = -1;
+    }//GEN-LAST:event_MinBtnActionPerformed
+
+    private void MaxBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaxBtnActionPerformed
+        // TODO add your handling code here:
+        MinBtn.setSelected(false);
+        minmax = 1;
+    }//GEN-LAST:event_MaxBtnActionPerformed
+
+    private void StartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartBtnActionPerformed
+        // TODO add your hln("Z");andling code here:
+        int min = this.getMinMax();
+	int n = this.getNumVar();
+	double[] z = this.getZ();
+        
+        double[][] r = new double[][]{
+				{-24.0, -4.0, -6.0}, {16.0, 4.0, 2.0}, {3.0, 0.0, 1.0}
+		};
+
+	Simplex s = new Simplex(new Modelo(min, z, r, n));
+	Simplex.ResultadoSimplex resp = s.processar();
+    }//GEN-LAST:event_StartBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,8 +342,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelNumRestricoes;
     private javax.swing.JLabel labelProblema;
@@ -315,13 +349,50 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelVariaveis;
     private javax.swing.JSpinner numRestricoes;
     private javax.swing.JSpinner numVar;
+    private javax.swing.JTable tabelaRestr;
+    private javax.swing.JTable tabelaZ;
     // End of variables declaration//GEN-END:variables
-
+    private int minmax;
+    
+    /**
+     * Recupera número de restrições
+     */
     public int getNumRestricoes() {
         return (Integer) numRestricoes.getValue();
     }
     
+    /**
+     * Recupera número de variáveis
+     */
     public int getNumVar() {
         return (Integer) numVar.getValue();
+    }
+    
+    /**
+     * Recupera tipo do problema
+     * @return 1 para maximização e -1 para minimização
+     */
+    public int getMinMax() {
+        return minmax; 
+    }
+    
+    /**
+     * Recupera valores das variaveis da função objetiva
+     */
+    public double[] getZ()
+    {
+        TableModel model = tabelaZ.getModel();
+        double[] fo = new double[model.getColumnCount()];
+        
+        for(int i=0;i<model.getColumnCount();i++) {
+            try{
+                fo[i]=Double.parseDouble(model.getValueAt(0,i).toString());
+            }
+            catch (Exception e) {
+                System.out.println("getZ: Valor inválido na posição: "+i);
+                fo[i]=0.0;
+            }
+        }
+        return fo;
     }
 }
