@@ -26,11 +26,39 @@ public class Ferramentas {
     }
     
     /**
+     * Método que imprime um vetor
+     *
+     * @param Vetor a ser impresso
+     */
+    public static void printVetor(int[] vetor) {
+        System.out.print("| ");
+        for (int i = 0; i < vetor.length; i++) {
+            System.out.print(vetor[i] + " ");
+        }
+        System.out.print(" |\n");
+    }
+    
+    /**
      * Método que imprime uma matriz
      *
      * @param Matriz a ser impressa
      */
     public static void printMatriz(double[][] m) {
+        for (int i = 0; i < m.length; i++) {
+            System.out.print("| ");
+            for (int j = 0; j < m[i].length; j++) {
+                System.out.print(m[i][j] + " ");
+            }
+            System.out.print(" |\n");
+        }
+    }
+    
+    /**
+     * Método que imprime uma matriz
+     *
+     * @param Matriz a ser impressa
+     */
+    public static void printMatriz(int[][] m) {
         for (int i = 0; i < m.length; i++) {
             System.out.print("| ");
             for (int j = 0; j < m[i].length; j++) {

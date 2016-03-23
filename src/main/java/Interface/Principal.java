@@ -81,6 +81,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        MaxBtn.setSelected(true);
         MaxBtn.setText("Maximização");
         MaxBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,10 +112,7 @@ public class Principal extends javax.swing.JFrame {
 
         tabelaRestr.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "X1", "X2", "Operador", "Valor"

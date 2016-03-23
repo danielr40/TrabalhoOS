@@ -45,10 +45,10 @@ public class Simplex{
 
 		// Preache arrays das variaveis.
 		for(int i = 0; i < varNaoBasicas.length; i++){
-			this.varNaoBasicas[i] = i;
+			this.varNaoBasicas[i] = i+1;
 		}
 		for(int i = 0; i < varBasicas.length; i++){
-			this.varBasicas[i] = i + model.getNumVar();
+			this.varBasicas[i] = i + model.getNumVar() + 1;
 		}
 	}
 
@@ -67,12 +67,14 @@ public class Simplex{
 		while(!fimPriemriaEtapa){
 			primeiraEtapa();
                         
+                        System.out.println("Matriz superior: ");
                         Ferramentas.printMatriz(matrizSup);
                         System.out.println("");
 		}
 		while(!fimSegundaEtapa){
 			segundaEtapa();
                         
+                        System.out.println("Matriz superior: ");
                         Ferramentas.printMatriz(matrizSup);
                         System.out.println("");
 		}
@@ -299,8 +301,10 @@ public class Simplex{
 		}
 
 		// Multiplica-se toda a coluna pelo negativo do EP Inverso
-		for(int i = 0; i < matrizSup.length && i != linha; i++){
-			matrizInf[i][coluna] =  matrizSup[i][coluna] * (-1 * inverso);
+		for(int i = 0; i < matrizSup[linha].length+1; i++){
+                    if(i!=linha) {
+                            matrizInf[i][coluna] = (-1.0) * matrizSup[i][coluna] * inverso;
+                    }
 		}
 
 		// Nas (SCI) vazias, multiplica-se a (SCS) marcada em sua respectiva
