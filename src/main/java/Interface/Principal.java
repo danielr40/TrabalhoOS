@@ -284,10 +284,7 @@ public class Principal extends javax.swing.JFrame {
         int min = this.getMinMax();
 	int n = this.getNumVar();
 	double[] z = this.getZ();
-        
-        double[][] r = new double[][]{
-				{-24.0, -4.0, -6.0}, {16.0, 4.0, 2.0}, {3.0, 0.0, 1.0}
-		};
+        double[][] r = this.getRestricoes();
 
 	Simplex s = new Simplex(new Modelo(min, z, r, n));
 	Simplex.ResultadoSimplex resp = s.processar();
@@ -394,5 +391,30 @@ public class Principal extends javax.swing.JFrame {
             }
         }
         return fo;
+    }
+    
+    /**
+     * Recupera as restrições da interface 
+     */
+    public double[][] getRestricoes(){
+        
+        TableModel model = this.tabelaRestr.getModel();
+        
+        double valor, operador, var;
+        double[][]restricoes = new double[model.getRowCount()][model.getColumnCount()-1];
+        
+        for(int i=0;i<model.getRowCount();i++) {
+            valor = Double.parseDouble(""+model.getValueAt(i,model.getColumnCount()-1));
+            operador = Double.parseDouble(""+model.getValueAt(i,model.getColumnCount()-2));
+            
+            restricoes[i][0] = (operador>0) ? valor : valor*(-1);
+            
+            for(int j=0;j<model.getColumnCount()-2;j++)
+            {
+                var = Double.parseDouble(""+model.getValueAt(i,j));
+                restricoes[i][j+1] = (operador>0) ? var : var*(-1); 
+            }
+        }
+        return restricoes; 
     }
 }
