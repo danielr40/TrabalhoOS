@@ -47,7 +47,6 @@ public class Principal extends javax.swing.JFrame {
         labelNumRestricoes = new javax.swing.JLabel();
         numVar = new javax.swing.JSpinner();
         numRestricoes = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -65,6 +64,7 @@ public class Principal extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Otimização de Sistemas");
 
         MinBtn.setText("Minimização");
         MinBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -96,9 +96,6 @@ public class Principal extends javax.swing.JFrame {
         labelRestricoes.setText("Restrições:");
 
         labelNumRestricoes.setText("Número de Restrições:");
-
-        jLabel1.setFont(new java.awt.Font("Bebas Neue Bold", 0, 48)); // NOI18N
-        jLabel1.setText("Otimização de Sistemas");
 
         jLabel2.setFont(new java.awt.Font("Bebas Neue Bold", 0, 18)); // NOI18N
         jLabel2.setText("Daniel Reis, Felipe Botrel, Júlia Gobbo e Mateus Silveira");
@@ -161,9 +158,6 @@ public class Principal extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton1))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(203, 203, 203)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel2)
                                 .addGap(151, 151, 151)
@@ -171,7 +165,7 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(labelRestricoes)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 1, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,9 +176,7 @@ public class Principal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelProblema)
                     .addComponent(MinBtn)
@@ -329,7 +321,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton StartBtn;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;

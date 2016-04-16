@@ -42,7 +42,14 @@ public class Simplex{
 		this.matrizSup[0][0] = 0;
 		System.arraycopy(model.getZ(), 0, matrizSup[0], 1, model.getZ().length);
 		System.arraycopy(model.getRestricoes(), 0, matrizSup, 1, model.getRestricoes().length);
-
+                   
+                if(model.getMinmax() == -1){ // minimização
+                    // inverter sinal das variáveis na função objetiva 
+                    for(int i=1;i<matrizSup[0].length;i++){ 
+                        matrizSup[0][i] = - matrizSup[0][i]; 
+                    }
+                }
+                
 		// Preache arrays das variaveis.
 		for(int i = 0; i < varNaoBasicas.length; i++){
 			this.varNaoBasicas[i] = i+1;
@@ -301,7 +308,7 @@ public class Simplex{
 		}
 
 		// Multiplica-se toda a coluna pelo negativo do EP Inverso
-		for(int i = 0; i < matrizSup[linha].length+1; i++){
+		for(int i = 0; i < matrizSup[linha].length; i++){
                     if(i!=linha) {
                             matrizInf[i][coluna] = (-1.0) * matrizSup[i][coluna] * inverso;
                     }
