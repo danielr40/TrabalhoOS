@@ -1,5 +1,9 @@
 package Simplex;
 
+import Interface.Relatorio;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  * Executa o metodo simplex.
  */
@@ -58,6 +62,21 @@ public class Simplex{
 			this.varBasicas[i] = i + model.getNumVar() + 1;
 		}
 	}
+        
+        public void exibirRelatorio(){
+            if(this.resultado == ResultadoSimplex.SOLUCAO_OTIMA){
+                JFrame result = new Relatorio(this.matrizSup,this.varBasicas,this.varNaoBasicas);
+                result.setVisible(true);
+            }
+            else if(this.resultado == ResultadoSimplex.SOLUCAO_ILIMITADA){
+                JOptionPane.showMessageDialog(new JFrame(),
+                    "Solução ilimitada!");
+            }
+            else if(this.resultado == ResultadoSimplex.SEM_SOLUCAO){
+                JOptionPane.showMessageDialog(new JFrame(),
+                    "Nenhuma solução encontrada!");
+            }
+        }
 
 	/**
 	 * Faz o processamento.
@@ -86,6 +105,8 @@ public class Simplex{
                         System.out.println("");
 		}
         // TODO: Retornar valor de z e das variÃ¡veis nÃ£o basicas.
+                exibirRelatorio();
+                
 		return this.resultado;
 	}
 
