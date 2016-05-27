@@ -11,6 +11,9 @@ public class Modelo{
 	private double[][] restricoes;
 	private int numVar;
 
+	public Modelo(){
+
+	}
 	public Modelo(int minmax, double[] z, double[][] rest, int n){
 		this.minmax = minmax;
 		this.z = z;

@@ -28,13 +28,13 @@ public class Simplex{
 	private boolean fimSegundaEtapa = false; // Indica se a segunda etapa acabou
 
 	private ResultadoSimplex resultado;
+	public double[] valoresVariaveisDescisao;
 
 	public Simplex(Modelo model){
 
 		/*
 		 * Inicializa as variaveis.
 		 */
-
 		this.model = model;
 
 		this.matrizSup = new double[model.getRestricoes().length + 1][model.getRestricoes()[0].length];
@@ -47,12 +47,12 @@ public class Simplex{
 		System.arraycopy(model.getZ(), 0, matrizSup[0], 1, model.getZ().length);
 		System.arraycopy(model.getRestricoes(), 0, matrizSup, 1, model.getRestricoes().length);
                    
-                if(model.getMinmax() == -1){ // minimização
-                    // inverter sinal das variáveis na função objetiva 
-                    for(int i=1;i<matrizSup[0].length;i++){ 
-                        matrizSup[0][i] = - matrizSup[0][i]; 
-                    }
-                }
+		if(model.getMinmax() == -1){ // minimizaï¿½ï¿½o
+			// inverter sinal das variï¿½veis na funï¿½ï¿½o objetiva
+			for(int i=1;i<matrizSup[0].length;i++){
+				matrizSup[0][i] = - matrizSup[0][i];
+			}
+		}
                 
 		// Preache arrays das variaveis.
 		for(int i = 0; i < varNaoBasicas.length; i++){
@@ -63,20 +63,20 @@ public class Simplex{
 		}
 	}
         
-        public void exibirRelatorio(){
-            if(this.resultado == ResultadoSimplex.SOLUCAO_OTIMA){
-                JFrame result = new Relatorio(this.matrizSup,this.varBasicas,this.varNaoBasicas);
-                result.setVisible(true);
-            }
-            else if(this.resultado == ResultadoSimplex.SOLUCAO_ILIMITADA){
-                JOptionPane.showMessageDialog(new JFrame(),
-                    "Solução ilimitada!");
-            }
-            else if(this.resultado == ResultadoSimplex.SEM_SOLUCAO){
-                JOptionPane.showMessageDialog(new JFrame(),
-                    "Nenhuma solução encontrada!");
-            }
-        }
+	public void exibirRelatorio(){
+		if(this.resultado == ResultadoSimplex.SOLUCAO_OTIMA){
+			JFrame result = new Relatorio(this.matrizSup,this.varBasicas,this.varNaoBasicas);
+			result.setVisible(true);
+		}
+		else if(this.resultado == ResultadoSimplex.SOLUCAO_ILIMITADA){
+			JOptionPane.showMessageDialog(new JFrame(),
+				"Soluï¿½ï¿½o ilimitada!");
+		}
+		else if(this.resultado == ResultadoSimplex.SEM_SOLUCAO){
+			JOptionPane.showMessageDialog(new JFrame(),
+				"Nenhuma soluï¿½ï¿½o encontrada!");
+		}
+	}
 
 	/**
 	 * Faz o processamento.
@@ -87,25 +87,25 @@ public class Simplex{
 	 */
 	public ResultadoSimplex processar(){
             
-                Ferramentas.printMatriz(matrizSup);
-                System.out.println("");
+		Ferramentas.printMatriz(matrizSup);
+		System.out.println("");
                 
 		while(!fimPriemriaEtapa){
 			primeiraEtapa();
                         
-                        System.out.println("Matriz superior: ");
-                        Ferramentas.printMatriz(matrizSup);
-                        System.out.println("");
+			System.out.println("Matriz superior: ");
+			Ferramentas.printMatriz(matrizSup);
+			System.out.println("");
 		}
 		while(!fimSegundaEtapa){
 			segundaEtapa();
                         
-                        System.out.println("Matriz superior: ");
-                        Ferramentas.printMatriz(matrizSup);
-                        System.out.println("");
+			System.out.println("Matriz superior: ");
+			Ferramentas.printMatriz(matrizSup);
+			System.out.println("");
 		}
         // TODO: Retornar valor de z e das variÃ¡veis nÃ£o basicas.
-                exibirRelatorio();
+		exibirRelatorio();
                 
 		return this.resultado;
 	}
@@ -153,7 +153,7 @@ public class Simplex{
 			// Na linha que corresponde Ã  variÃ¡vel com Membro Livre negativo,
 			// procuramos uma coluna com um elemento negativo
 			for(int i = 1; i < matrizSup[0].length; i++){
-				if(matrizSup[linha][i] <= 0){
+				if(matrizSup[linha][i] < 0){
 					coluna = i;
 					break;
 				 }
@@ -329,7 +329,7 @@ public class Simplex{
 		}
 
 		// Multiplica-se toda a coluna pelo negativo do EP Inverso
-		for(int i = 0; i < matrizSup[linha].length; i++){
+		for(int i = 0; i < matrizSup.length; i++){
                     if(i!=linha) {
                             matrizInf[i][coluna] = (-1.0) * matrizSup[i][coluna] * inverso;
                     }
