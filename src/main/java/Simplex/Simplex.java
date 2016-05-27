@@ -105,6 +105,16 @@ public class Simplex{
 			System.out.println("");
 		}
         // TODO: Retornar valor de z e das variáveis não basicas.
+                valoresVariaveisDescisao = new double [model.getNumVar()];
+                for (int i = 0; i < varBasicas.length; i++){
+                    if(varBasicas[i]-1<model.getNumVar())
+                    valoresVariaveisDescisao[varBasicas[i]-1] = matrizSup[i+1][0];
+                }
+             //   for (int i = 0; i < model.getNumVar(); i++){
+            //        System.out.println(valoresVariaveisDescisao[i]);
+            //    }
+                
+        
 		exibirRelatorio();
                 
 		return this.resultado;
