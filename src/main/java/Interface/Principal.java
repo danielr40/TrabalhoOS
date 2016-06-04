@@ -394,12 +394,19 @@ public class Principal extends javax.swing.JFrame {
         
         for(int i=0;i<model.getRowCount();i++) {
             valor = Double.parseDouble(""+model.getValueAt(i,model.getColumnCount()-1));
-            operador = Double.parseDouble(""+model.getValueAt(i,model.getColumnCount()-2));
+            if((""+model.getValueAt(i,model.getColumnCount()-2)).equals("<")||
+                    (""+model.getValueAt(i,model.getColumnCount()-2)).equals("<=")){
+                operador = -1;
+            }else if((""+model.getValueAt(i,model.getColumnCount()-2)).equals(">")||
+                    (""+model.getValueAt(i,model.getColumnCount()-2)).equals(">=")){
+                operador = 1;
+            }else{
+                operador = 0;
+            }
             
             restricoes[i][0] = (operador>0) ? valor : valor*(-1);
             
-            for(int j=0;j<model.getColumnCount()-2;j++)
-            {
+            for(int j=0;j<model.getColumnCount()-2;j++){                
                 var = Double.parseDouble(""+model.getValueAt(i,j));
                 restricoes[i][j+1] = (operador>0) ? var : var*(-1); 
             }
