@@ -396,8 +396,10 @@ public class Principal extends javax.swing.JFrame {
             valor = Double.parseDouble(""+model.getValueAt(i,model.getColumnCount()-1));
             if((""+model.getValueAt(i,model.getColumnCount()-2)).equals("<")||
                     (""+model.getValueAt(i,model.getColumnCount()-2)).equals("<=")){
+                operador = 1;
             }else if((""+model.getValueAt(i,model.getColumnCount()-2)).equals(">")||
                     (""+model.getValueAt(i,model.getColumnCount()-2)).equals(">=")){
+                operador = -1;
             }else{
                 operador = 0;
             }
