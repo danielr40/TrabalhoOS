@@ -87,7 +87,7 @@ public class BranchAndBound{
 					restricao[0] = -1 * Math.ceil(aux);
 					for(int j = 1; j < restricao.length; j++){
 						if((j-1) == i){
-							restricao[j] = 1;
+							restricao[j] = -1;
 						}else{
 							restricao[j] = 0;
 						}
