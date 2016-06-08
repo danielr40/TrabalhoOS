@@ -1,6 +1,7 @@
 package BranchAndBound;
 
 import Simplex.Modelo;
+import Simplex.Simplex;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ public class Nodo{
 	private List<Nodo> filhos;
 
 	private ResultadoBeB result;
+
+	private Simplex resultadoSimplex;
 
 	public Modelo getModelo(){
 		return modelo;
@@ -39,5 +42,13 @@ public class Nodo{
 
 	public void setResult(Nodo.ResultadoBeB result){
 		this.result = result;
+	}
+
+	public Simplex getResultadoSimplex(){
+		return resultadoSimplex;
+	}
+
+	public void setResultadoSimplex(Simplex resultadoSimplex){
+		this.resultadoSimplex = resultadoSimplex;
 	}
 }

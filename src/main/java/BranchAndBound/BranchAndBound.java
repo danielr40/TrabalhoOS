@@ -51,6 +51,8 @@ public class BranchAndBound{
 		Simplex s = new Simplex(n.getModelo());
 		Simplex.ResultadoSimplex result = s.processar(false);
 
+		n.setResultadoSimplex(s);
+
 		if(result == Simplex.ResultadoSimplex.SOLUCAO_OTIMA){
 			for(int i = 0; i < n.getModelo().getNumVar(); i++){
 				aux = s.valoresVariaveisDescisao[i];
