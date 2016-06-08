@@ -26,8 +26,11 @@ public class BranchAndBound{
 
 		this.queue = new LinkedList<Nodo>();
 		queue.add(raiz);
-                melhor = new Simplex ();
-                melhor.matrizSup[0][0] = Integer.MAX_VALUE;
+		melhor = new Simplex ();
+		if(model.getMinmax()==1)
+			melhor.matrizSup[0][0] = Integer.MAX_VALUE;
+		else
+			melhor.matrizSup[0][0] = Integer.MIN_VALUE;
 	}
 
 	public void processar(){
@@ -98,8 +101,15 @@ public class BranchAndBound{
 
 			if(!achou){
 				n.setResult(Nodo.ResultadoBeB.TS_2);
-                                if(melhor.matrizSup[0][0] > s.matrizSup[0][0])
-                                    melhor = s;
+				if(n.getModelo().getMinmax() == 1){
+					if(melhor.matrizSup[0][0] > s.matrizSup[0][0]){
+						melhor = s;
+					}
+				}else{
+					if(melhor.matrizSup[0][0] < s.matrizSup[0][0]){
+						melhor = s;
+					}
+				}
 			}else{
 				n.setFilhos(filhos);
 				queue.addAll(filhos);
