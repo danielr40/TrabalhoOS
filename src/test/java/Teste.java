@@ -16,8 +16,8 @@ public class Teste{
 		};
 
 		Simplex s = new Simplex(new Modelo(min, z, r, n));
-		Simplex.ResultadoSimplex resp = s.processar();
+		//Simplex.ResultadoSimplex resp = s.processar();
 
-		System.out.println(resp);
+		//System.out.println(resp);
 	}
 }

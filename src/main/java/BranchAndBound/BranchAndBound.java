@@ -34,7 +34,7 @@ public class BranchAndBound{
 		while(!queue.isEmpty()){
 			conquer(queue.poll());
 		}
-                melhor.exibirRelatorio();
+		melhor.exibirRelatorio();
 	}
 
 	private void conquer(Nodo n){
@@ -61,10 +61,10 @@ public class BranchAndBound{
 					modeloAux.setNumVar(n.getModelo().getNumVar());
 					modeloAux.setZ(n.getModelo().getZ());
 					restricao = new double[n.getModelo().getNumVar() + 1];
-					restricao[0] = n.getModelo().getMinmax() * Math.floor(aux);
-					for(int j = 1; i < restricao.length; i++){
+					restricao[0] =  Math.floor(aux);
+					for(int j = 1; j < restricao.length; j++){
 						if((j-1) == i){
-							restricao[j] = n.getModelo().getMinmax();
+							restricao[j] = 1;
 						}else{
 							restricao[j] = 0;
 						}
@@ -81,10 +81,10 @@ public class BranchAndBound{
 					modeloAux.setNumVar(n.getModelo().getNumVar());
 					modeloAux.setZ(n.getModelo().getZ());
 					restricao = new double[n.getModelo().getNumVar() + 1];
-					restricao[0] = n.getModelo().getMinmax() * Math.ceil(aux);
-					for(int j = 1; i < restricao.length; i++){
+					restricao[0] = -1 * Math.ceil(aux);
+					for(int j = 1; j < restricao.length; j++){
 						if((j-1) == i){
-							restricao[j] = n.getModelo().getMinmax();
+							restricao[j] = 1;
 						}else{
 							restricao[j] = 0;
 						}

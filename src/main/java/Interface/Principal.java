@@ -14,7 +14,7 @@ import javax.swing.table.TableModel;
 
 /**
  *
- * @author júlia
+ * @author jï¿½lia
  */
 public class Principal extends javax.swing.JFrame {
 
@@ -68,9 +68,9 @@ public class Principal extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Otimização de Sistemas");
+        setTitle("Otimizaï¿½ï¿½o de Sistemas");
 
-        MinBtn.setText("Minimização");
+        MinBtn.setText("Minimizaï¿½ï¿½o");
         MinBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MinBtnActionPerformed(evt);
@@ -86,7 +86,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         MaxBtn.setSelected(true);
-        MaxBtn.setText("Maximização");
+        MaxBtn.setText("Maximizaï¿½ï¿½o");
         MaxBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MaxBtnActionPerformed(evt);
@@ -95,14 +95,14 @@ public class Principal extends javax.swing.JFrame {
 
         labelProblema.setText("Problema de:");
 
-        labelVariaveis.setText("Número de Variáveis: ");
+        labelVariaveis.setText("Nï¿½mero de Variï¿½veis: ");
 
-        labelRestricoes.setText("Restrições:");
+        labelRestricoes.setText("Restriï¿½ï¿½es:");
 
-        labelNumRestricoes.setText("Número de Restrições:");
+        labelNumRestricoes.setText("Nï¿½mero de Restriï¿½ï¿½es:");
 
         jLabel2.setFont(new java.awt.Font("Bebas Neue Bold", 0, 18)); // NOI18N
-        jLabel2.setText("Daniel Reis, Felipe Botrel, Júlia Gobbo e Mateus Silveira");
+        jLabel2.setText("Daniel Reis, Felipe Botrel, Jï¿½lia Gobbo e Mateus Silveira");
 
         jButton1.setText("Confirmar Valores");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +121,7 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tabelaRestr);
 
-        jLabel3.setText("Função Objetiva: ");
+        jLabel3.setText("Funï¿½ï¿½o Objetiva: ");
 
         tabelaZ.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -320,7 +320,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_simplexActionPerformed
 
     private void branchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchActionPerformed
-        MinBtn.setSelected(false);
+        simplex.setSelected(false);
     }//GEN-LAST:event_branchActionPerformed
 
     /**
@@ -387,14 +387,14 @@ public class Principal extends javax.swing.JFrame {
     private int minmax = 1;
     
     /**
-     * Recupera número de restrições
+     * Recupera nï¿½mero de restriï¿½ï¿½es
      */
     public int getNumRestricoes() {
         return (Integer) numRestricoes.getValue();
     }
     
     /**
-     * Recupera número de variáveis
+     * Recupera nï¿½mero de variï¿½veis
      */
     public int getNumVar() {
         return (Integer) numVar.getValue();
@@ -402,14 +402,14 @@ public class Principal extends javax.swing.JFrame {
     
     /**
      * Recupera tipo do problema
-     * @return 1 para maximização e -1 para minimização
+     * @return 1 para maximizaï¿½ï¿½o e -1 para minimizaï¿½ï¿½o
      */
     public int getMinMax() {
         return minmax; 
     }
     
     /**
-     * Recupera valores das variaveis da função objetiva
+     * Recupera valores das variaveis da funï¿½ï¿½o objetiva
      */
     public double[] getZ()
     {
@@ -421,7 +421,7 @@ public class Principal extends javax.swing.JFrame {
                 fo[i]=Double.parseDouble(model.getValueAt(0,i).toString());
             }
             catch (Exception e) {
-                System.out.println("getZ: Valor inválido na posição: "+i);
+                System.out.println("getZ: Valor invï¿½lido na posiï¿½ï¿½o: "+i);
                 fo[i]=0.0;
             }
         }
@@ -429,7 +429,7 @@ public class Principal extends javax.swing.JFrame {
     }
     
     /**
-     * Recupera as restrições da interface 
+     * Recupera as restriï¿½ï¿½es da interface 
      */
     public double[][] getRestricoes(){
         
