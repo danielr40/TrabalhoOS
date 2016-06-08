@@ -384,7 +384,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTable tabelaRestr;
     private javax.swing.JTable tabelaZ;
     // End of variables declaration//GEN-END:variables
-    private int minmax;
+    private int minmax = 1;
     
     /**
      * Recupera número de restrições
