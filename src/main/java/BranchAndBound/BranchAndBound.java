@@ -13,6 +13,8 @@ public class BranchAndBound{
 	private Modelo base;
 
 	private Nodo raiz;
+        
+        private Simplex melhor;
 
 	private Queue<Nodo> queue;
 
@@ -24,12 +26,15 @@ public class BranchAndBound{
 
 		this.queue = new LinkedList<Nodo>();
 		queue.add(raiz);
+                melhor = new Simplex ();
+                melhor.matrizSup[0][0] = Integer.MAX_VALUE;
 	}
 
 	public void processar(){
 		while(!queue.isEmpty()){
 			conquer(queue.poll());
 		}
+                melhor.exibirRelatorio();
 	}
 
 	private void conquer(Nodo n){
@@ -41,7 +46,7 @@ public class BranchAndBound{
 		boolean achou = false;
 
 		Simplex s = new Simplex(n.getModelo());
-		Simplex.ResultadoSimplex result = s.processar();
+		Simplex.ResultadoSimplex result = s.processar(false);
 
 		if(result == Simplex.ResultadoSimplex.SOLUCAO_OTIMA){
 			for(int i = 0; i < n.getModelo().getNumVar(); i++){
@@ -93,6 +98,8 @@ public class BranchAndBound{
 
 			if(!achou){
 				n.setResult(Nodo.ResultadoBeB.TS_2);
+                                if(melhor.matrizSup[0][0] > s.matrizSup[0][0])
+                                    melhor = s;
 			}else{
 				n.setFilhos(filhos);
 				queue.addAll(filhos);

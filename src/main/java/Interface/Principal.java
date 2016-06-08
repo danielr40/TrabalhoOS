@@ -5,6 +5,7 @@
  */
 package Interface;
 
+import BranchAndBound.BranchAndBound;
 import Simplex.Ferramentas;
 import Simplex.Modelo;
 import Simplex.Simplex;
@@ -54,6 +55,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaZ = new javax.swing.JTable();
+        simplex = new javax.swing.JRadioButton();
+        branch = new javax.swing.JRadioButton();
+        labelProblema1 = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -129,6 +133,23 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelaZ);
 
+        simplex.setText("Simplex Comum ");
+        simplex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simplexActionPerformed(evt);
+            }
+        });
+
+        branch.setSelected(true);
+        branch.setText("Simplex com Inteiros");
+        branch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                branchActionPerformed(evt);
+            }
+        });
+
+        labelProblema1.setText("Utilizar:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,12 +162,6 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(labelProblema)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(MinBtn)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(MaxBtn))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(labelVariaveis)
                                             .addComponent(labelNumRestricoes)
@@ -156,7 +171,19 @@ public class Principal extends javax.swing.JFrame {
                                             .addComponent(numRestricoes, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                                             .addComponent(numVar))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton1))))
+                                        .addComponent(jButton1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(labelProblema)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(MinBtn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(MaxBtn)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(labelProblema1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(simplex)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(branch))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel2)
@@ -180,7 +207,11 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelProblema)
                     .addComponent(MinBtn)
-                    .addComponent(MaxBtn))
+                    .addComponent(MaxBtn)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(simplex)
+                        .addComponent(branch))
+                    .addComponent(labelProblema1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numVar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,10 +306,22 @@ public class Principal extends javax.swing.JFrame {
 	int n = this.getNumVar();
 	double[] z = this.getZ();
         double[][] r = this.getRestricoes();
-
-	Simplex s = new Simplex(new Modelo(min, z, r, n));
-	Simplex.ResultadoSimplex resp = s.processar();
+        if(simplex.isSelected()){
+            Simplex s = new Simplex(new Modelo(min, z, r, n));
+            Simplex.ResultadoSimplex resp = s.processar(true);
+        }else{
+            BranchAndBound bb = new BranchAndBound(new Modelo(min,z,r,n));   
+            bb.processar();
+        }
     }//GEN-LAST:event_StartBtnActionPerformed
+
+    private void simplexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simplexActionPerformed
+        branch.setSelected(false);
+    }//GEN-LAST:event_simplexActionPerformed
+
+    private void branchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchActionPerformed
+        MinBtn.setSelected(false);
+    }//GEN-LAST:event_branchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,6 +362,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButton MaxBtn;
     private javax.swing.JRadioButton MinBtn;
     private javax.swing.JButton StartBtn;
+    private javax.swing.JRadioButton branch;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
@@ -331,10 +375,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelNumRestricoes;
     private javax.swing.JLabel labelProblema;
+    private javax.swing.JLabel labelProblema1;
     private javax.swing.JLabel labelRestricoes;
     private javax.swing.JLabel labelVariaveis;
     private javax.swing.JSpinner numRestricoes;
     private javax.swing.JSpinner numVar;
+    private javax.swing.JRadioButton simplex;
     private javax.swing.JTable tabelaRestr;
     private javax.swing.JTable tabelaZ;
     // End of variables declaration//GEN-END:variables

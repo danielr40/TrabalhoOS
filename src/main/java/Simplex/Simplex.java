@@ -18,7 +18,7 @@ public class Simplex{
 
 	private Modelo model; // Modelo
 
-	private double[][] matrizSup; // Parte superior da matriz
+	public double[][] matrizSup; // Parte superior da matriz
 	private double[][] matrizInf; // Parte inferior da matriz
 
 	private int[] varNaoBasicas; // Variaveis não basicas.
@@ -29,6 +29,10 @@ public class Simplex{
 
 	private ResultadoSimplex resultado;
 	public double[] valoresVariaveisDescisao;
+        
+        public Simplex(){
+            this.matrizSup = new double[1][1];
+        }
 
 	public Simplex(Modelo model){
 
@@ -85,7 +89,7 @@ public class Simplex{
 	 *
 	 * @return enum equivalente ao resultado do processamento.
 	 */
-	public ResultadoSimplex processar(){            
+	public ResultadoSimplex processar(boolean s){            
 		/*Ferramentas.printMatriz(matrizSup);
 		System.out.println("");*/                
 		while(!fimPriemriaEtapa){
@@ -106,7 +110,7 @@ public class Simplex{
                     if(varBasicas[i]-1<model.getNumVar())
                     valoresVariaveisDescisao[varBasicas[i]-1] = matrizSup[i+1][0];
                 }
-        
+                if(s)
 		exibirRelatorio();
                 
 		return this.resultado;
