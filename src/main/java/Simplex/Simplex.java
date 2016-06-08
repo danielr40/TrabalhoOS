@@ -70,11 +70,11 @@ public class Simplex{
 		}
 		else if(this.resultado == ResultadoSimplex.SOLUCAO_ILIMITADA){
 			JOptionPane.showMessageDialog(new JFrame(),
-				"Soluï¿½ï¿½o ilimitada!");
+				"Solução ilimitada!");
 		}
 		else if(this.resultado == ResultadoSimplex.SEM_SOLUCAO){
 			JOptionPane.showMessageDialog(new JFrame(),
-				"Nenhuma soluï¿½ï¿½o encontrada!");
+				"Nenhuma solução encontrada!");
 		}
 	}
 
@@ -85,35 +85,27 @@ public class Simplex{
 	 *
 	 * @return enum equivalente ao resultado do processamento.
 	 */
-	public ResultadoSimplex processar(){
-            
-		Ferramentas.printMatriz(matrizSup);
-		System.out.println("");
-                
+	public ResultadoSimplex processar(){            
+		/*Ferramentas.printMatriz(matrizSup);
+		System.out.println("");*/                
 		while(!fimPriemriaEtapa){
-			primeiraEtapa();
-                        
-			System.out.println("Matriz superior: ");
+			primeiraEtapa();                        
+			/*System.out.println("Matriz superior: ");
 			Ferramentas.printMatriz(matrizSup);
-			System.out.println("");
+			System.out.println("");*/
 		}
 		while(!fimSegundaEtapa){
-			segundaEtapa();
-                        
-			System.out.println("Matriz superior: ");
+			segundaEtapa();                        
+			/*System.out.println("Matriz superior: ");
 			Ferramentas.printMatriz(matrizSup);
-			System.out.println("");
+			System.out.println("");*/
 		}
-        // TODO: Retornar valor de z e das variÃ¡veis nÃ£o basicas.
+                // Retornar valor de z e das variaveis nao basicas.
                 valoresVariaveisDescisao = new double [model.getNumVar()];
                 for (int i = 0; i < varBasicas.length; i++){
                     if(varBasicas[i]-1<model.getNumVar())
                     valoresVariaveisDescisao[varBasicas[i]-1] = matrizSup[i+1][0];
                 }
-             //   for (int i = 0; i < model.getNumVar(); i++){
-            //        System.out.println(valoresVariaveisDescisao[i]);
-            //    }
-                
         
 		exibirRelatorio();
                 
