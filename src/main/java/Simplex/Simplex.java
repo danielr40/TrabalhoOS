@@ -69,7 +69,7 @@ public class Simplex{
         
 	public void exibirRelatorio(){
 		if(this.resultado == ResultadoSimplex.SOLUCAO_OTIMA){
-			JFrame result = new Relatorio(this.matrizSup,this.varBasicas,this.varNaoBasicas);
+			JFrame result = new Relatorio(this.matrizSup,this.varBasicas,this.varNaoBasicas, model.getMinmax());
 			result.setVisible(true);
 		}
 		else if(this.resultado == ResultadoSimplex.SOLUCAO_ILIMITADA){

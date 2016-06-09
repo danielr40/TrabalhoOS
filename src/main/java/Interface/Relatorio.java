@@ -5,21 +5,23 @@
  */
 package Interface;
 
+import Simplex.Ferramentas;
+
 /**
  *
  * @author Daniel
  */
 public class Relatorio extends javax.swing.JFrame {
-
+    int minmax;
     /**
      * Creates new form Relatório
      */
-    public Relatorio(double[][]matriz,int[]varBasicas,int[]varNaoBasicas) {
+    public Relatorio(double[][]matriz,int[]varBasicas,int[]varNaoBasicas, int minmax) {
         
         this.matriz = matriz;
         this.varBasicas = varBasicas;
         this.varNaoBasicas = varNaoBasicas; 
-        
+        this.minmax = minmax;
         initComponents();
         criarTabela(); 
     }
@@ -28,10 +30,10 @@ public class Relatorio extends javax.swing.JFrame {
     
         int numVar = varBasicas.length + varNaoBasicas.length + 1; 
         
-        String [][] modelo = new String[numVar][2]; 
+        String [][] modelo = new String[numVar][4]; 
         
         modelo[0][0]="Função Objetiva";
-        modelo[0][1]=""+matriz[0][0];
+        modelo[0][1]=""+-1*minmax*matriz[0][0];
         
         for(int i=1;i<numVar;i++){
             modelo[i][0] = "X" + (i); 
@@ -45,7 +47,20 @@ public class Relatorio extends javax.swing.JFrame {
             modelo[varNaoBasicas[i]][1] = "" + 0; 
         }
         
-        String[]titulos = new String []{"Variável","Valor"};
+        for(int i=0;i<varNaoBasicas.length;i++){
+            if(varNaoBasicas[i] >= varBasicas.length){
+                modelo[varNaoBasicas[i]][3] = "" + -1*minmax*matriz[0][i+1]; 
+            }else{
+                modelo[varNaoBasicas[i]][3] = "" + 0;
+            }
+        }
+        
+        for(int i = 0;i<varBasicas.length;i++){
+            modelo[varBasicas[i]][3] = "" + 0; 
+        }
+        
+        Ferramentas.printMatriz(matriz);
+        String[]titulos = new String []{"Variável","Valor","Variação", "Preço Sombra"};
         
         tabelaResultado.setModel(new javax.swing.table.DefaultTableModel(
             modelo,
@@ -74,7 +89,7 @@ public class Relatorio extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Variável", "Valor"
+                "Variável", "Valor" , "Variação", "Preço Sombra"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -93,14 +108,14 @@ public class Relatorio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
