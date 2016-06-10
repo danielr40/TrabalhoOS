@@ -18,7 +18,7 @@ public class Simplex{
 
 	private Modelo model; // Modelo
 
-	public double[][] matrizSup; // Parte superior da matriz
+	private double[][] matrizSup; // Parte superior da matriz
 	private double[][] matrizInf; // Parte inferior da matriz
 
 	private int[] varNaoBasicas; // Variaveis n√£o basicas.
@@ -69,7 +69,7 @@ public class Simplex{
         
 	public void exibirRelatorio(){
 		if(this.resultado == ResultadoSimplex.SOLUCAO_OTIMA){
-			JFrame result = new Relatorio(this.matrizSup,this.varBasicas,this.varNaoBasicas, model.getMinmax());
+			JFrame result = new Relatorio(this);
 			result.setVisible(true);
 		}
 		else if(this.resultado == ResultadoSimplex.SOLUCAO_ILIMITADA){
@@ -370,4 +370,47 @@ public class Simplex{
 		}
 		matrizSup = novaMatriz;
 	}
+    
+    /**
+    * Retorna o a matriz superior.
+    *
+    * @return matrizSup
+    */
+    public double [] [] getMatrizSup(){
+           return this.matrizSup;
+    }
+    
+   
+    public void setZ( double z){
+           this.matrizSup[0][0] = z;
+    }
+    
+    /**
+    * Retorna as variaveis Basicas.
+    *
+    * @return varBasicas
+    */
+    public int [] getVarBasicas(){
+           return this.varBasicas;
+    }
+    
+    /**
+    * Retorna as variaveis n„o basicas
+    *
+    * @return varNaoBasicas
+    */
+    public int [] getVarNaoBasicas(){
+           return this.varNaoBasicas;
+    }
+    
+    /**
+    * Retorna o modelo
+    *
+    * @return model
+    */
+    public Modelo getModelo(){
+           return this.model;
+    }
 }
+
+

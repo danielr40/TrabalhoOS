@@ -6,22 +6,25 @@
 package Interface;
 
 import Simplex.Ferramentas;
+import Simplex.Simplex;
 
 /**
  *
  * @author Daniel
  */
 public class Relatorio extends javax.swing.JFrame {
-    int minmax;
+    private int minmax;
+    private double [] operadores;
     /**
      * Creates new form Relatório
      */
-    public Relatorio(double[][]matriz,int[]varBasicas,int[]varNaoBasicas, int minmax) {
+    public Relatorio(Simplex s) {
         
-        this.matriz = matriz;
-        this.varBasicas = varBasicas;
-        this.varNaoBasicas = varNaoBasicas; 
-        this.minmax = minmax;
+        this.matriz = s.getMatrizSup();
+        this.varBasicas = s.getVarBasicas();
+        this.varNaoBasicas = s.getVarNaoBasicas(); 
+        this.minmax = s.getModelo().getMinmax();
+        this.operadores = s.getModelo().getOperadores();
         initComponents();
         criarTabela(); 
     }
@@ -30,7 +33,8 @@ public class Relatorio extends javax.swing.JFrame {
     
         int numVar = varBasicas.length + varNaoBasicas.length + 1; 
         
-        String [][] modelo = new String[numVar][4]; 
+        String [][] modelo = new String[numVar][3]; 
+        String [][] modelo2 = new String[numVar][3]; 
         
         modelo[0][0]="Função Objetiva";
         modelo[0][1]=""+-1*minmax*matriz[0][0];
@@ -40,31 +44,44 @@ public class Relatorio extends javax.swing.JFrame {
         }
         
         for(int i=0;i<varBasicas.length;i++){
-            modelo[varBasicas[i]][1] = "" + matriz[i+1][0]; 
+            modelo2[i][0] = "R" + (i+1); 
+            modelo2[i][2] = "" + 0;
+            modelo2[i][1] = "" + 0;
+        }
+        
+        for(int i=0;i<varBasicas.length;i++){
+            modelo[varBasicas[i]][1] = "" + matriz[i+1][0];
+            if(varBasicas[i] >= varBasicas.length){
+                modelo2[varNaoBasicas[i]-varBasicas.length][2] = "" + -1*minmax*matriz[0][i+1]; 
+            }
         }
         
         for(int i=0;i<varNaoBasicas.length;i++){
             modelo[varNaoBasicas[i]][1] = "" + 0; 
         }
         
+               
         for(int i=0;i<varNaoBasicas.length;i++){
             if(varNaoBasicas[i] >= varBasicas.length){
-                modelo[varNaoBasicas[i]][3] = "" + -1*minmax*matriz[0][i+1]; 
-            }else{
-                modelo[varNaoBasicas[i]][3] = "" + 0;
+                modelo2[varNaoBasicas[i]-varBasicas.length][2] = "" + -1*minmax*matriz[0][i+1]; 
             }
         }
         
-        for(int i = 0;i<varBasicas.length;i++){
-            modelo[varBasicas[i]][3] = "" + 0; 
-        }
+        
         
         Ferramentas.printMatriz(matriz);
-        String[]titulos = new String []{"Variável","Valor","Variação", "Preço Sombra"};
+        String[]titulos = new String []{"Variável","Valor","Variação"};
+        
+        String[]titulos2 = new String []{"Restrição","Valor","Preço Sombra"};
         
         tabelaResultado.setModel(new javax.swing.table.DefaultTableModel(
             modelo,
             titulos
+        ));
+        
+        tabelaResultado1.setModel(new javax.swing.table.DefaultTableModel(
+            modelo2,
+            titulos2
         ));
     }
     
@@ -80,6 +97,8 @@ public class Relatorio extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaResultado = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelaResultado1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Resultado");
@@ -102,20 +121,42 @@ public class Relatorio extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaResultado);
 
+        tabelaResultado1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+            },
+            new String [] {
+                "Variável", "Valor" , "Variação", "Preço Sombra"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tabelaResultado1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -156,6 +197,8 @@ public class Relatorio extends javax.swing.JFrame {
     private int [] varNaoBasicas; 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tabelaResultado;
+    private javax.swing.JTable tabelaResultado1;
     // End of variables declaration//GEN-END:variables
 }

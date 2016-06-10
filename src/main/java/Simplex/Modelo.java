@@ -8,17 +8,19 @@ package Simplex;
 public class Modelo{
 	private int minmax; // -1 = Min, 1 = Max
 	private double[] z;
+        private double[] operadores;
 	private double[][] restricoes;
 	private int numVar;
 
 	public Modelo(){
 
 	}
-	public Modelo(int minmax, double[] z, double[][] rest, int n){
+	public Modelo(int minmax, double[] z, double[][] rest, int n, double [] operadores){
 		this.minmax = minmax;
 		this.z = z;
 		this.restricoes = rest;
 		this.numVar = n;
+                this.operadores = operadores;
 	}
 
 	/**
@@ -101,6 +103,15 @@ public class Modelo{
 		this.numVar = numVar;
 	}
 
+        /**
+	 * Retorna o o vetor de operadores.
+	 *
+	 * @return operadores
+	 */
+	public double [] getOperadores(){
+		return this.operadores;
+	}
+        
 	/**
 	 * Prepara o modelo para ser colocado na matriz do metodo Simplex.
 	 * <p>
@@ -112,7 +123,7 @@ public class Modelo{
 	 * </ol>
 	 *
 	 * @return Modelo preparado
-	 */
+	 *
 	public static Modelo prepararModelo(){
 		int minmax = 0, numVar = 0, numRest = 0;
 		int[] ineqRest = new int[numRest];
@@ -121,8 +132,8 @@ public class Modelo{
 
 		/*
 		 * TODO: Receber modelo da interfaçe, parsear os valores, montar objeto modelo.
-		 */
+		 *
 
 		return new Modelo(minmax, z, restricoes, numVar);
-	}
+	}*/
 }

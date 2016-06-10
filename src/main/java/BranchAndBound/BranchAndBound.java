@@ -28,9 +28,10 @@ public class BranchAndBound{
 		queue.add(raiz);
 		melhor = new Simplex ();
 		if(model.getMinmax()==1)
-			melhor.matrizSup[0][0] = Integer.MAX_VALUE;
+			melhor.setZ(Integer.MAX_VALUE);
 		else
-			melhor.matrizSup[0][0] = Integer.MIN_VALUE;
+			melhor.setZ(Integer.MIN_VALUE);
+                raiz.setValor((int) melhor.getMatrizSup()[0][0]);
 	}
 
 	public void processar(){
@@ -104,11 +105,11 @@ public class BranchAndBound{
 			if(!achou){
 				n.setResult(Nodo.ResultadoBeB.TS_2);
 				if(n.getModelo().getMinmax() == 1){
-					if(melhor.matrizSup[0][0] > s.matrizSup[0][0]){
+					if(melhor.getMatrizSup()[0][0] > s.getMatrizSup()[0][0]){
 						melhor = s;
 					}
 				}else{
-					if(melhor.matrizSup[0][0] < s.matrizSup[0][0]){
+					if(melhor.getMatrizSup()[0][0] < s.getMatrizSup()[0][0]){
 						melhor = s;
 					}
 				}

@@ -308,10 +308,10 @@ public class Principal extends javax.swing.JFrame {
 	double[] z = this.getZ();
         double[][] r = this.getRestricoes();
         if(simplex.isSelected()){
-            Simplex s = new Simplex(new Modelo(min, z, r, n));
+            Simplex s = new Simplex(new Modelo(min, z, r, n, operadores));
             Simplex.ResultadoSimplex resp = s.processar(true);
         }else{
-            BranchAndBound bb = new BranchAndBound(new Modelo(min,z,r,n));   
+            BranchAndBound bb = new BranchAndBound(new Modelo(min,z,r,n,operadores));   
             bb.processar();
         }
     }//GEN-LAST:event_StartBtnActionPerformed
@@ -386,6 +386,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTable tabelaZ;
     // End of variables declaration//GEN-END:variables
     private int minmax = 1;
+    private double [] operadores;
     
     /**
      * Recupera n�mero de restri��es
@@ -438,6 +439,7 @@ public class Principal extends javax.swing.JFrame {
         
         double valor, operador, var;
         double[][]restricoes = new double[model.getRowCount()][model.getColumnCount()-1];
+        operadores = new double [model.getRowCount()];
         
         for(int i=0;i<model.getRowCount();i++) {
             valor = Double.parseDouble(""+model.getValueAt(i,model.getColumnCount()-1));
@@ -450,7 +452,7 @@ public class Principal extends javax.swing.JFrame {
             }else{
                 operador = 0;
             }
-                        
+            operadores[i] = -1*operador;            
             restricoes[i][0] = (operador>0) ? valor : valor*(-1);
             
             for(int j=0;j<model.getColumnCount()-2;j++)
