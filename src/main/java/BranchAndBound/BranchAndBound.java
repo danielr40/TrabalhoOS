@@ -19,7 +19,7 @@ public class BranchAndBound{
 	private Queue<Nodo> queue;
 
 	public BranchAndBound(Modelo model){
-		this.base = model;
+                this.base = model;
 
 		this.raiz = new Nodo();
 		raiz.setModelo(model);
@@ -39,6 +39,11 @@ public class BranchAndBound{
 			conquer(queue.poll());
 		}
 		melhor.exibirRelatorio();
+                
+                Grafo g = new Grafo(raiz);
+		g.setSize(500, 500);
+		g.setVisible(true);
+		//return miniMax(av.getRaiz(), g);
 	}
 
 	private void conquer(Nodo n){
