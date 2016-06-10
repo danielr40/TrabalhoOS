@@ -28,10 +28,10 @@ public class Grafo extends JFrame{
 
     public Grafo(Nodo raiz, double melhor){
 		try{
-                        this.melhor = melhor;
+			this.melhor = melhor;
 			stack.add(graph.insertVertex(parent, "", (-1)*raiz.getResultadoSimplex().getMatrizSup()[0][0]+"", 30, 30, 40, 30, STYLE_NORMAL));
-			System.out.println(raiz.getFilhos().size());
-                        if(raiz.getFilhos().size() > 0) visitar(raiz, stack.peek());
+			//System.out.println(raiz.getFilhos().size());
+			if(raiz.getFilhos() != null && raiz.getFilhos().size() > 0) visitar(raiz, stack.peek());
 		}finally{
 			graph.getModel().endUpdate();
 		}

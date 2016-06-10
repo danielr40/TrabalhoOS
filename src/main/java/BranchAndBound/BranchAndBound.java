@@ -36,18 +36,18 @@ public class BranchAndBound{
 	}
 
 	public void processar(){
-            long inicio = System.currentTimeMillis();
-		while(!queue.isEmpty()){
+		long inicio = System.currentTimeMillis();
+		while(!queue.isEmpty()&& queue.size() <= 500){
 			conquer(queue.poll());
 		}
-                //raiz.setValor((int) melhor.getMatrizSup()[0][0]);
-                long fim = System.currentTimeMillis();
-                time = fim - inicio;
-                melhor.setTime (time);
+		//raiz.setValor((int) melhor.getMatrizSup()[0][0]);
+		long fim = System.currentTimeMillis();
+		time = fim - inicio;
+		melhor.setTime (time);
 		melhor.exibirRelatorio();
                 
-                Grafo g = new Grafo(raiz, melhor.getMatrizSup()[0][0]);
-                g.setTitle("Árvore do Branch and Bound");
+        Grafo g = new Grafo(raiz, melhor.getMatrizSup()[0][0]);
+        g.setTitle("ï¿½rvore do Branch and Bound");
 		g.setSize(500, 500);
 		g.setVisible(true);
 		//return miniMax(av.getRaiz(), g);
