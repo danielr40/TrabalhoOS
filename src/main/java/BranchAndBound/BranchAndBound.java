@@ -17,6 +17,8 @@ public class BranchAndBound{
         private Simplex melhor;
 
 	private Queue<Nodo> queue;
+        
+        private long time;
 
 	public BranchAndBound(Modelo model){
                 this.base = model;
@@ -35,9 +37,13 @@ public class BranchAndBound{
 	}
 
 	public void processar(){
+            long inicio = System.currentTimeMillis();
 		while(!queue.isEmpty()){
 			conquer(queue.poll());
 		}
+                long fim = System.currentTimeMillis();
+                time = fim - inicio;
+                melhor.setTime (time);
 		melhor.exibirRelatorio();
                 
                 Grafo g = new Grafo(raiz);

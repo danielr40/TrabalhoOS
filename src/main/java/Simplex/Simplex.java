@@ -15,7 +15,7 @@ public class Simplex{
 	public enum ResultadoSimplex{
 		SOLUCAO_OTIMA, SOLUCAO_ILIMITADA, MULTIPLAS_SOLUCOES, SEM_SOLUCAO
 	}
-
+        private long time;
 	private Modelo model; // Modelo
 
 	private double[][] matrizSup; // Parte superior da matriz
@@ -89,7 +89,8 @@ public class Simplex{
 	 *
 	 * @return enum equivalente ao resultado do processamento.
 	 */
-	public ResultadoSimplex processar(boolean s){            
+	public ResultadoSimplex processar(boolean s){ 
+            long inicio = System.currentTimeMillis();
 		/*Ferramentas.printMatriz(matrizSup);
 		System.out.println("");*/                
 		while(!fimPriemriaEtapa){
@@ -110,6 +111,9 @@ public class Simplex{
                     if(varBasicas[i]-1<model.getNumVar())
                     valoresVariaveisDescisao[varBasicas[i]-1] = matrizSup[i+1][0];
                 }
+                long fim = System.currentTimeMillis();
+                
+                time = fim - inicio;
                 if(s)
 		exibirRelatorio();
                 
@@ -410,6 +414,24 @@ public class Simplex{
     */
     public Modelo getModelo(){
            return this.model;
+    }
+    
+     /**
+    * Retorna o tempo de execução
+    *
+    * @return time
+    */
+    public long getTime(){
+           return this.time;
+    }
+    
+     /**
+    * Seta o tempo de execução
+    *
+     * @param time
+    */
+    public void setTime(long time){
+           this.time = time;
     }
 }
 
