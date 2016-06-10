@@ -19,6 +19,8 @@ public class Nodo{
 	private ResultadoBeB result;
 
 	private Simplex resultadoSimplex;
+        
+        private int valorArvore;
 
 	public Modelo getModelo(){
 		return modelo;
@@ -51,4 +53,12 @@ public class Nodo{
 	public void setResultadoSimplex(Simplex resultadoSimplex){
 		this.resultadoSimplex = resultadoSimplex;
 	}
+        
+        public int getValor(){
+            return valorArvore;
+        }
+        
+        public void setValor(int valor){
+            this.valorArvore = valor;
+        }
 }

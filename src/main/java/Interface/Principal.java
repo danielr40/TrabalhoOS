@@ -68,9 +68,9 @@ public class Principal extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Otimizaï¿½ï¿½o de Sistemas");
+        setTitle("Otimização de Sistemas");
 
-        MinBtn.setText("Minimizaï¿½ï¿½o");
+        MinBtn.setText("Minimização");
         MinBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MinBtnActionPerformed(evt);
@@ -86,7 +86,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         MaxBtn.setSelected(true);
-        MaxBtn.setText("Maximizaï¿½ï¿½o");
+        MaxBtn.setText("Maximização");
         MaxBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MaxBtnActionPerformed(evt);
@@ -95,14 +95,14 @@ public class Principal extends javax.swing.JFrame {
 
         labelProblema.setText("Problema de:");
 
-        labelVariaveis.setText("Nï¿½mero de Variï¿½veis: ");
+        labelVariaveis.setText("Número de Variáveis: ");
 
-        labelRestricoes.setText("Restriï¿½ï¿½es:");
+        labelRestricoes.setText("Restrições:");
 
-        labelNumRestricoes.setText("Nï¿½mero de Restriï¿½ï¿½es:");
+        labelNumRestricoes.setText("Número de Restrições:");
 
         jLabel2.setFont(new java.awt.Font("Bebas Neue Bold", 0, 18)); // NOI18N
-        jLabel2.setText("Daniel Reis, Felipe Botrel, Jï¿½lia Gobbo e Mateus Silveira");
+        jLabel2.setText("Daniel Reis, Felipe Botrel, Júlia Gobbo e Mateus Silveira");
 
         jButton1.setText("Confirmar Valores");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +121,7 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tabelaRestr);
 
-        jLabel3.setText("Funï¿½ï¿½o Objetiva: ");
+        jLabel3.setText("Função Objetiva: ");
 
         tabelaZ.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -204,14 +204,15 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelProblema)
-                    .addComponent(MinBtn)
-                    .addComponent(MaxBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(simplex)
                         .addComponent(branch))
-                    .addComponent(labelProblema1))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(labelProblema)
+                        .addComponent(MinBtn)
+                        .addComponent(MaxBtn)
+                        .addComponent(labelProblema1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numVar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

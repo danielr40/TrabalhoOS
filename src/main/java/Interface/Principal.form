@@ -116,15 +116,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labelProblema" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="MinBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="MaxBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="simplex" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="branch" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="labelProblema1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="labelProblema" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="MinBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="MaxBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelProblema1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
