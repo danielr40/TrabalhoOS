@@ -44,7 +44,11 @@ public class Relatorio extends javax.swing.JFrame {
         modelo[0][1]=""+-1*minmax*matriz[0][0];
         
         for(int i=1;i<numVar;i++){
-            modelo[i][0] = "X" + (i); 
+            modelo[i][0] = "0"; 
+            modelo[i][1] = "0"; 
+            modelo[i][2] = "0"; 
+            modelo[i][3] = "0"; 
+            
         }
         
         for(int i=0;i<varBasicas.length;i++){
@@ -60,6 +64,14 @@ public class Relatorio extends javax.swing.JFrame {
                 modelo[varNaoBasicas[i]][3] = "" + -1*minmax*matriz[0][i+1]; 
             }else{
                 modelo[varNaoBasicas[i]][3] = "" + 0;
+            }
+        }
+        
+        for(int i=0;i<varNaoBasicas.length;i++){
+            if(varNaoBasicas[i] <= varBasicas.length){
+                modelo[varNaoBasicas[i]][2] = "" + -1*minmax*matriz[0][i+1]; 
+            }else{
+                modelo[varNaoBasicas[i]][2] = "" + 0;
             }
         }
         
