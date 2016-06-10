@@ -33,7 +33,6 @@ public class BranchAndBound{
 			melhor.setZ(Integer.MAX_VALUE);
 		else
 			melhor.setZ(Integer.MIN_VALUE);
-                raiz.setValor((int) melhor.getMatrizSup()[0][0]);
 	}
 
 	public void processar(){
@@ -41,12 +40,14 @@ public class BranchAndBound{
 		while(!queue.isEmpty()){
 			conquer(queue.poll());
 		}
+                //raiz.setValor((int) melhor.getMatrizSup()[0][0]);
                 long fim = System.currentTimeMillis();
                 time = fim - inicio;
                 melhor.setTime (time);
 		melhor.exibirRelatorio();
                 
-                Grafo g = new Grafo(raiz);
+                Grafo g = new Grafo(raiz, melhor.getMatrizSup()[0][0]);
+                g.setTitle("Árvore do Branch and Bound");
 		g.setSize(500, 500);
 		g.setVisible(true);
 		//return miniMax(av.getRaiz(), g);

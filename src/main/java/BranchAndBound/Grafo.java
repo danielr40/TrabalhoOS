@@ -15,7 +15,7 @@ import java.util.Stack;
  */
 public class Grafo extends JFrame{
 	private static final long serialVersionUID = -2707712944901661771L;
-        
+        double melhor = 0;
 	Stack <Object> stack = new Stack ();
 	mxGraph graph = new mxGraph();
 	Object parent = graph.getDefaultParent();
@@ -24,13 +24,14 @@ public class Grafo extends JFrame{
 	mxCell prevVisit;
 
 	private final String STYLE_NORMAL = "NORMAL;fillColor=#61BEF7;strokeColor=#0C2C40";
-	private final String STYLE_VISITING = "VISIT;fillColor=#9DD0B6;strokeColor=#206037";
-	private final String STYLE_CUT = "CUT;dashed=true;strokeColor=#A61723;fillColor=F2EEAE";
+	private final String STYLE_BEST =   "BEST;fillColor=#32CD32;strokeColor=#006400";
 
-    public Grafo(Nodo raiz){
+    public Grafo(Nodo raiz, double melhor){
 		try{
-			stack.add(graph.insertVertex(parent, raiz.getValor()+"", "", 30, 30, 40, 30, STYLE_NORMAL));
-			if(raiz.getFilhos().size() > 0) visitar(raiz, stack.peek());
+                        this.melhor = melhor;
+			stack.add(graph.insertVertex(parent, "", (-1)*raiz.getResultadoSimplex().getMatrizSup()[0][0]+"", 30, 30, 40, 30, STYLE_NORMAL));
+			System.out.println(raiz.getFilhos().size());
+                        if(raiz.getFilhos().size() > 0) visitar(raiz, stack.peek());
 		}finally{
 			graph.getModel().endUpdate();
 		}
@@ -48,11 +49,19 @@ public class Grafo extends JFrame{
      * @param o
      */
     public void visitar (Nodo n, Object o){  
+        if(n.getFilhos() != null)
         if(n.getFilhos().size() > 0){
 			for(Nodo a : n.getFilhos()){
-				stack.add(graph.insertVertex(parent, "", a.getValor(), 30, 30, 40, 30, STYLE_NORMAL));
-				graph.insertEdge(parent, n.getValor()+"-"+a.getValor(), "", o, stack.peek(), STYLE_NORMAL);
+                            if (a.getResultadoSimplex().getMatrizSup()[0][0] == melhor){
+                                stack.add(graph.insertVertex(parent, "", (-1)*a.getResultadoSimplex().getMatrizSup()[0][0], 30, 30, 40, 30, STYLE_BEST));
+				graph.insertEdge(parent, n.getResultadoSimplex().getMatrizSup()[0][0]+"-"+a.getResultadoSimplex().getMatrizSup()[0][0], "", o, stack.peek(), STYLE_NORMAL);
 				visitar(a, stack.peek());
+                            }
+                            else {
+				stack.add(graph.insertVertex(parent, "", (-1)*a.getResultadoSimplex().getMatrizSup()[0][0], 30, 30, 40, 30, STYLE_NORMAL));
+				graph.insertEdge(parent, n.getResultadoSimplex().getMatrizSup()[0][0]+"-"+a.getResultadoSimplex().getMatrizSup()[0][0], "", o, stack.peek(), STYLE_NORMAL);
+				visitar(a, stack.peek()); 
+                            }
 			}
 		}
 	}
